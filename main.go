@@ -7,14 +7,22 @@ import (
 )
 
 func main() {
+	game.Welcome()
 	hangman := game.New(8, "Golang")
-	fmt.Println(hangman)
+	input := ""
+	for {
+		game.DrawGame(hangman, input)
 
-	input, err := game.ReadUserInput()
-	if err != nil {
-		fmt.Printf("Something wrong happened : %v", err)
-		os.Exit(1)
-	}
+		if (hangman.State == "won" || hangman.State == "lost") {
+			os.Exit(0)
+		}
 
-	fmt.Print(input)
+		input, err := game.ReadUserInput()
+		if err != nil {
+			fmt.Printf("Something wrong happened : %v", err)
+			os.Exit(1)
+		}
+
+		hangman.MakeAGuess(input)
+	}	
 }
