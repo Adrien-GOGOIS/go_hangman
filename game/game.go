@@ -38,6 +38,13 @@ func (game *Hangman) MakeAGuess(input string) {
 		if hasWon(game.Letters, game.FoundLetters) {
 			game.State = "won"
 		}
+	} else {
+		game.AlreadyUsedLetters = append(game.AlreadyUsedLetters, input)
+		game.State = "badGuess"
+		game.RemainingAttempts--
+		if(game.RemainingAttempts == 0) {
+			game.State = "lost"
+		}
 	}
 }
 

@@ -25,12 +25,12 @@ func drawTurns(turns int) {
 			----------
 			|     |
 			|     @
-			|    /|\  You lose
+			|    /|\  YOU LOSE !
 			|     |
 			|    / \
 			|
 			|
-	______________
+			______________
 			`
 		case 1:
 			draw = `
@@ -42,7 +42,7 @@ func drawTurns(turns int) {
 			|    / \
 			|
 			|
-	______________
+			______________
 			`
 		case 2:
 			draw = `
@@ -54,7 +54,7 @@ func drawTurns(turns int) {
 			|    
 			|
 			|
-	______________
+			______________
 			`
 		case 3:
 			draw = `
@@ -66,7 +66,7 @@ func drawTurns(turns int) {
 			|    
 			|
 			|
-	______________
+			______________
 			`
 		case 4:
 			draw = `
@@ -78,7 +78,7 @@ func drawTurns(turns int) {
 			|    
 			|
 			|
-	______________
+			______________
 			`
 		case 5:
 			draw = `
@@ -90,7 +90,7 @@ func drawTurns(turns int) {
 			|    
 			|
 			|
-	______________
+			______________
 			`
 		case 6:
 			draw = `
@@ -99,13 +99,13 @@ func drawTurns(turns int) {
 			|    
 			|
 			|
-	______________
+			______________
 			`
 		case 7:
 			draw = `
 			
 			
-	______________
+			______________
 			`
 		case 8:
 			draw = `
@@ -124,17 +124,17 @@ func drawState(game *Hangman, input string)  {
 
 	switch game.State {
 	case "goodGuess":
-		fmt.Print("Bon choix !")
+		fmt.Print("Bon choix !\n")
 	case "alreadyGuessed":
-		fmt.Printf("Lettre %v déjà utilisée !", input)
+		fmt.Printf("Lettre %v déjà utilisée !\n", input)
 	case "badGuess":
-		fmt.Printf("Mauvais choix, %v n'est pas dans ce mot !", input)
+		fmt.Printf("Mauvais choix, %v n'est pas dans ce mot !\n", input)
+		fmt.Printf("Il te reste %v essais\n", game.RemainingAttempts)
 	case "lost":
-		fmt.Print("Perdu !")
+		fmt.Print("Perdu !\n")
 		drawLetters(game.Letters)
 	case "won":
-		fmt.Print("Tu as choisi...judicieusement !")
-		drawLetters(game.Letters)
+		drawWin()
 	}
 }
 
@@ -143,4 +143,14 @@ func drawLetters(letters []string) {
 		fmt.Printf("%v ", char)
 	}
 	fmt.Println()
+}
+
+func drawWin() {
+	fmt.Printf(`
+	{}             {}   {}   {}      {}  {}
+	 {}           {}    {}   {} {}   {}  {}
+	  {}   {}    {}     {}   {}  {}  {}  {}
+	   {} {} {} {}      {}   {}   {} {}
+	    {}    {}        {}   {}      {}  {}
+	`)
 }
