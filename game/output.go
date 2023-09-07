@@ -1,6 +1,10 @@
 package game
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/fatih/color"
+)
 
 func Welcome() {
 	fmt.Println(`
@@ -116,20 +120,25 @@ func drawTurns(turns int) {
 }
 
 func drawState(game *Hangman, input string)  {
-	fmt.Print("Mot : ")
+	color.Blue("Mot : ")
+	fmt.Print(" \n")
 	drawLetters(game.FoundLetters)
-
-	fmt.Print("Lettres utilisées : ")
+	fmt.Print(" \n")
+	color.Yellow("Lettres utilisées : ")
+	fmt.Print(" \n")
 	drawLetters(game.AlreadyUsedLetters)
+	fmt.Print(" \n")
 
 	switch game.State {
 	case "goodGuess":
-		fmt.Print("Bon choix !\n")
+		color.Green("Bon choix !\n")
+		fmt.Print(" \n")
 	case "alreadyGuessed":
-		fmt.Printf("Lettre %v déjà utilisée !\n", input)
+		color.Yellow("Lettre déjà utilisée !\n")
 	case "badGuess":
-		fmt.Printf("Mauvais choix, %v n'est pas dans ce mot !\n", input)
+		color.Red("Mauvais choix !\n")
 		fmt.Printf("Il te reste %v essais\n", game.RemainingAttempts)
+		fmt.Print(" \n")
 	case "lost":
 		fmt.Print("Perdu !\n")
 		drawLetters(game.Letters)
@@ -147,10 +156,10 @@ func drawLetters(letters []string) {
 
 func drawWin() {
 	fmt.Printf(`
-	{}             {}   {}   {}      {}  {}
-	 {}           {}    {}   {} {}   {}  {}
-	  {}   {}    {}     {}   {}  {}  {}  {}
+	{}             {}   {}   {}      {}   {}
+	 {}           {}    {}   {} {}   {}   {}
+	  {}   {}    {}     {}   {}  {}  {}   {}
 	   {} {} {} {}      {}   {}   {} {}
-	    {}    {}        {}   {}      {}  {}
+	    {}    {}        {}   {}      {}   {}
 	`)
 }
